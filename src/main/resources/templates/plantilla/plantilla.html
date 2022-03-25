@@ -1,21 +1,37 @@
 <!DOCTYPE html>
-<!--
-Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
-Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this template
--->
-<html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns="http://www.w3.org/1999/xhtml">
     <head>
-        <title>TODO supply a title</title>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>TechShop</title>
+        <meta charset="UTF-8"/>
     </head>
     <body>
-        <header th:fragment="header">
-            <h1>TechShop</h1>
+        <header th:fragment="header" class="header">
+            <nav class="nav">
+                <a th:href="@{/}" class="logo nav-link">TechShop</a>
+                <ul class="nav-menu">
+                    <li class="nav-menu-item">
+                        <a th:href="@{/cliente/listado}" class="nav-menu-link nav-link"
+                           th:text="#{plantilla.clientes}">Clientes_n</a>
+                    </li>
+                    <li class="nav-menu-item">
+                        <a th:href="@{/categoria/listado}" class="nav-menu-link nav-link"
+                            th:text="#{plantilla.categorias}">Categorias_n</a>
+                    </li>
+                    <li class="nav-menu-item">
+                        <a th:href="@{/articulo/listado}" class="nav-menu-link nav-link"
+                            th:text="#{plantilla.articulos}">Articulos_n</a>
+                    </li>
+                </ul>
+            </nav>
         </header>
         
-        <footer th:fragment="footer">
-            <p>&COPY Derechos Reservados 2022</p>
+        <footer th:fragment="footer" class="footer">
+            <p>&COPY [[#{plantilla.derechos}]] | 
+                <a th:href="@{/(lang=es)}">ES</a> |
+                <a th:href="@{/(lang=en)}">EN</a> |
+                <a th:href="@{/(lang=fr)}">FR</a>
+            </p>
         </footer>
     </body>
 </html>
