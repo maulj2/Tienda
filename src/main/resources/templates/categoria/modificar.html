@@ -3,28 +3,27 @@
       xmlns:th="http://wwww.thymeleaf.org" 
       xmlns:sec="http://thymeleaft.org/extras/spring-security">
 
-    <head>
+    <head th:replace="plantilla/plantilla :: head">
         <title>TechShop</title>
-        <meta charset="UTF-8"/>
-        <link href="/css/menu.css" rel="stylesheet" type="text/css"/>
     </head>
     <body>
         <header th:replace="plantilla/plantilla :: header" />
         <div class="contenido">
-            <h2>Datos de Categoria</h2>
-            <a th:href="@{/categoria/listado}">Regresar</a>
-            <form method="post"
-                  th:action="@{/categoria/guardar}"
+            <h2 th:text="#{categoria.datos}">Datos de Categoria</h2>
+            <a th:href="@{/categoria/listado}" th:text="#{accion.regresar}">Regresar</a>
+            <br/><br/>
+            <form th:action="@{/categoria/guardar}"
+                  method="post"                  
                   th:object="${categoria}">
                 <input type="hidden" name="idCategoria" th:field="*{idCategoria}"/>
-                <label for="descripcion">Descripcion: </label>
+                <label for="descripcion" th:text="#{categoria.descripcion}">Descripcion: </label>
                 <input type="text" name="descripcion" th:field="*{descripcion}"/>
                 <br/>
-                <label for="activo">Activo: </label>
-                <input type="checkbox" name="activo" th:checked="${cetegorio.activo}" disabled="true"/>
+                <label for="activo" th:text="#{categoria.activo}">Activo: </label>
+                <input type="checkbox" name="activo" th:checked="${categorio.activo}" disabled="true"/>
                 <br/>
                 <br/>
-                <input type="submit" name="guardar" value="Guardar"/>
+                <button type="submit" name="guardar" th:text="#{accion.guardar}"/>
             </form>
         </div>
         <footer th:replace="plantilla/plantilla :: footer" />

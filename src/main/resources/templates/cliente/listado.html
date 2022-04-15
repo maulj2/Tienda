@@ -3,47 +3,16 @@
       xmlns:th="http://wwww.thymeleaf.org" 
       xmlns:sec="http://thymeleaft.org/extras/spring-security">
 
-    <head>
+    <head th:replace="plantilla/plantilla :: head">
         <title>TechShop</title>
-        <meta charset="UTF-8"/>
-        <link href="/css/menu.css" rel="stylesheet" type="text/css"/>
     </head>
     <body>
         <header th:replace="plantilla/plantilla :: header" />
-        <div class="contenido">
-            <h2>Gestión de Clientes</h2>
-            <a th:href="@{/cliente/nuevo}" sec:authorize="hasRole('ROLE_ADMIN')">Nuevo Cliente</a>
-            <div th:if="${clientes != null and !clientes.empty}">
-                <table border="1">
-                    <thead>
-                        <tr>
-                            <th>Nombre</th>
-                            <th>Apellidos</th>
-                            <th>Correo</th>
-                            <th>Teléfono</th>
-                            <th>Límite</th>
-                            <th sec:authorize="hasRole('ROLE_ADMIN')">Eliminar</th>
-                            <th sec:authorize="hasRole('ROLE_ADMIN')">Modificar</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr th:each="cliente : ${clientes}">
-                            <td th:text="${cliente.nombre}"></td>
-                            <td th:text="${cliente.apellidos}"></td>
-                            <td th:text="${cliente.correo}"></td>
-                            <td th:text="${cliente.telefono}"></td>
-                            <td th:text="${cliente.credito.limite}"></td>
-                            <td sec:authorize="hasRole('ROLE_ADMIN')"><a th:href="@{/cliente/eliminar/}+${cliente.idCliente}">Eliminar</a></td>
-                            <td sec:authorize="hasRole('ROLE_ADMIN')"><a th:href="@{/cliente/modificar/}+${cliente.idCliente}">Modificar</a></td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-            <div th:if="${clientes == null or clientes.empty}">
-                No tenemos lista de clientes que mostrar...
-            </div>
-        </div>
+        <section th:replace="cliente/fragmentosCliente :: botonesAgregar"/>
+        <section th:replace="cliente/fragmentosCliente :: listadoClientes"/>
+        <section th:replace="cliente/fragmentosCliente :: agregarCliente"/>
+
         <footer th:replace="plantilla/plantilla :: footer" />
     </body>
-</HTML>
+</html>
 
