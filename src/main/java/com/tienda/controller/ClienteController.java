@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 
 @Controller
 @Slf4j
@@ -33,7 +34,7 @@ public class ClienteController {
         return "cliente/modificar";
     }
 
-    @GetMapping("/cliente/guardar")
+    @PostMapping("/cliente/guardar")
     public String guardarCliente(Cliente cliente) {
         clienteService.save(cliente);
         return "redirect:/cliente/listado";

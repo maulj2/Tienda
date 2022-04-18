@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 
 @Controller
 @Slf4j
@@ -30,10 +31,10 @@ public class CategoriaController {
 
     @GetMapping("/categoria/nueva")
     public String nuevoCategoria(Categoria categoria) {
-        return "categoria/modofocar";
+        return "categoria/modificar";
     }
 
-    @GetMapping("/categoria/guardar")
+    @PostMapping("/categoria/guardar")
     public String guardarCategoria(Categoria categoria) {
         categoriaService.save(categoria);
         return "redirect:/categoria/listado";

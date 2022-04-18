@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 
 @Controller
 @Slf4j
@@ -20,25 +21,25 @@ public class ArticuloController {
 
     @GetMapping("/articulo/listado")
     public String inicio(Model model) {
-        var articulos = articuloService.getArticulo(false);
+        var articulo = articuloService.getArticulo(false);
         var limiteTotal = 0;
-        for (var c : articulos) {
+        for (var c : articulo) {
             limiteTotal += c.existencias;
         }
         model.addAttribute("limiteTotal", limiteTotal);
-        model.addAttribute("totalArticulos", articulos.size());
-        model.addAttribute("articulos", articulos);
+        model.addAttribute("totalArticulos", articulo.size());
+        model.addAttribute("articulos", articulo);
         return "/articulo/listado";
     }
 
     @GetMapping("/articulo/nuevo")
     public String nuevoArticulo(Articulo articulo, Model model) {
         var categorias = categoriaService.getCategorias(true);
-        model.addAttribute("categoria", categorias);
+        model.addAttribute("categorias", categorias);
         return "articulo/modificar";
     }
 
-    @GetMapping("/articulo/guardar")
+    @PostMapping("/articulo/guardar")
     public String guardarArticulo(Articulo articulo) {
         articuloService.save(articulo);
         return "redirect:/articulo/listado";
